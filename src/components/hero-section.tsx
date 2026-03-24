@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles } from "lucide-react"
 
@@ -23,12 +24,12 @@ export function HeroSection() {
         </p>
         <div className="flex gap-4 justify-center">
           <Button size="lg" asChild>
-            <a href="/posts">
+            <Link href="/posts">
               浏览文章 <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
+            </Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <a href="/about">了解更多</a>
+            <Link href="/about">了解更多</Link>
           </Button>
         </div>
       </div>

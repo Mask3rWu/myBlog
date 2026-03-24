@@ -6,6 +6,7 @@ import { Calendar, Clock, ArrowRight } from "lucide-react"
 
 interface PostCardProps {
   slug: string
+  category?: string
   title: string
   excerpt: string
   date: string
@@ -13,11 +14,16 @@ interface PostCardProps {
   tags: string[]
 }
 
-export function PostCard({ slug, title, excerpt, date, readTime, tags }: PostCardProps) {
+export function PostCard({ slug, category, title, excerpt, date, readTime, tags }: PostCardProps) {
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
       <CardHeader>
         <div className="flex gap-2 mb-3">
+          {category ? (
+            <Badge variant="outline" className="text-xs capitalize">
+              {category}
+            </Badge>
+          ) : null}
           {tags.map((tag) => (
             <Badge key={tag} variant="secondary" className="text-xs">
               {tag}

@@ -33,10 +33,12 @@ export function Navbar() {
           </Link>
         </nav>
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="sm">
-            登录
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/about">关于作者</Link>
           </Button>
-          <Button size="sm">开始写作</Button>
+          <Button size="sm" asChild>
+            <Link href="/posts">浏览文章</Link>
+          </Button>
         </div>
       </div>
     </header>
