@@ -170,7 +170,7 @@ export function PostsExplorer({
         </div>
       </section>
 
-      <aside className="space-y-5 xl:sticky xl:top-24 xl:self-start">
+      <aside className="space-y-5">
         <Card className="border-white/60 bg-white/80 shadow-md shadow-slate-200/60 backdrop-blur">
           <CardHeader>
             <CardTitle className="text-lg">筛选文章</CardTitle>

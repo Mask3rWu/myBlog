@@ -4,6 +4,10 @@
 
 文章内容现在通过 Markdown 文件管理，统一放在 `content/posts/` 目录下。
 
+在线访问地址：
+
+- https://mask3rwu.github.io/myBlog/
+
 ## 特性
 
 - ⚡ Next.js 14 + React 18
@@ -67,4 +71,4 @@ tags:
 2. 在仓库设置中启用 GitHub Pages，选择 `gh-pages` 分支
 3. 推送代码后会自动部署
 
-> 注意：博客将部署在 `https://username.github.io/myBlog/` 路径下
+> 当前部署地址：`https://mask3rwu.github.io/myBlog/`
