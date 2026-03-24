@@ -54,6 +54,9 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    background:
+      radial-gradient(circle at top, rgba(148, 163, 184, 0.18), transparent 28%),
+      linear-gradient(180deg, #f8fafc 0%, #eef2ff 45%, #f8fafc 100%);
+    @apply min-h-screen text-foreground antialiased;
   }
 }
