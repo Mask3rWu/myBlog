@@ -25,6 +25,12 @@ export function Navbar() {
             首页
           </Link>
           <Link
+            href="/posts"
+            className="text-sm font-medium text-slate-700 transition-colors hover:text-primary"
+          >
+            文章
+          </Link>
+          <Link
             href="/plan"
             className="text-sm font-medium text-slate-700 transition-colors hover:text-primary"
           >
