@@ -31,10 +31,16 @@ export function Navbar() {
             文章
           </Link>
           <Link
-            href="/plan"
+            href="/tasks"
             className="text-sm font-medium text-slate-700 transition-colors hover:text-primary"
           >
-            计划
+            任务管理
+          </Link>
+          <Link
+            href="/roadmap"
+            className="text-sm font-medium text-slate-700 transition-colors hover:text-primary"
+          >
+            站点规划
           </Link>
         </nav>
         <div className="hidden items-center gap-3 md:flex">
