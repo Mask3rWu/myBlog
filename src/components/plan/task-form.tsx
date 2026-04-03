@@ -28,9 +28,12 @@ export function TaskForm({ task, parentId, onSubmit, onCancel }: TaskFormProps) 
 
     try {
       const submitData = {
-        ...formData,
-        start_time: formData.start_time || null,
+        title: formData.title,
+        description: formData.description || null,
+        start_time: formData.start_time,
         end_time: formData.end_time || null,
+        is_completed: formData.is_completed,
+        parent_id: formData.parent_id,
       }
 
       await onSubmit(submitData)
