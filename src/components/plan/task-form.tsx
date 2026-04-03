@@ -14,12 +14,8 @@ export function TaskForm({ task, parentId, onSubmit, onCancel }: TaskFormProps) 
   const [formData, setFormData] = useState({
     title: task?.title || '',
     description: task?.description || '',
-    start_time: task?.start_time
-      ? new Date(task.start_time).toISOString().slice(0, 16)
-      : new Date().toISOString().slice(0, 16),
-    end_time: task?.end_time
-      ? new Date(task.end_time).toISOString().slice(0, 16)
-      : '',
+    start_time: task?.start_time || '',
+    end_time: task?.end_time || '',
     is_completed: task?.is_completed || false,
     parent_id: task?.parent_id || parentId || null,
   })
@@ -33,10 +29,8 @@ export function TaskForm({ task, parentId, onSubmit, onCancel }: TaskFormProps) 
     try {
       const submitData = {
         ...formData,
-        start_time: new Date(formData.start_time).toISOString(),
-        end_time: formData.end_time
-          ? new Date(formData.end_time).toISOString()
-          : null,
+        start_time: formData.start_time || null,
+        end_time: formData.end_time || null,
       }
 
       await onSubmit(submitData)
@@ -85,7 +79,7 @@ export function TaskForm({ task, parentId, onSubmit, onCancel }: TaskFormProps) 
             开始时间 *
           </label>
           <input
-            type="datetime-local"
+            type="date"
             id="start_time"
             required
             value={formData.start_time}
@@ -99,7 +93,7 @@ export function TaskForm({ task, parentId, onSubmit, onCancel }: TaskFormProps) 
             结束时间
           </label>
           <input
-            type="datetime-local"
+            type="date"
             id="end_time"
             value={formData.end_time}
             onChange={(e) => setFormData({ ...formData, end_time: e.target.value })}

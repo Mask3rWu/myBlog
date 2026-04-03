@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { TaskWithChildren } from '@/lib/supabase/types'
 import { TaskForm } from './task-form'
+import { useAuth } from '@/contexts/auth-context'
 import { ChevronRight, ChevronDown, CheckCircle, Circle } from 'lucide-react'
 
 interface TaskItemProps {
@@ -17,6 +18,7 @@ export function TaskItem({ task, onUpdate, onDelete, onAddChild, level = 0 }: Ta
   const [isExpanded, setIsExpanded] = useState(true)
   const [isEditing, setIsEditing] = useState(false)
   const [showAddChild, setShowAddChild] = useState(false)
+  const { user } = useAuth()
 
   const handleToggleComplete = async () => {
     await onUpdate(task.id, { is_completed: !task.is_completed })
@@ -30,7 +32,8 @@ export function TaskItem({ task, onUpdate, onDelete, onAddChild, level = 0 }: Ta
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return '未设置'
-    return new Date(dateString).toLocaleString('zh-CN')
+    const date = new Date(dateString)
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
   }
 
   if (isEditing) {
@@ -100,26 +103,28 @@ export function TaskItem({ task, onUpdate, onDelete, onAddChild, level = 0 }: Ta
             </div>
           </div>
 
-          <div className="flex gap-2">
-            <button
-              onClick={() => setShowAddChild(!showAddChild)}
-              className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
-            >
-              添加子任务
-            </button>
-            <button
-              onClick={() => setIsEditing(true)}
-              className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
-            >
-              编辑
-            </button>
-            <button
-              onClick={handleDelete}
-              className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
-            >
-              删除
-            </button>
-          </div>
+          {user && (
+            <div className="flex gap-2">
+              <button
+                onClick={() => setShowAddChild(!showAddChild)}
+                className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                添加子任务
+              </button>
+              <button
+                onClick={() => setIsEditing(true)}
+                className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+              >
+                编辑
+              </button>
+              <button
+                onClick={handleDelete}
+                className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
+              >
+                删除
+              </button>
+            </div>
+          )}
         </div>
       </div>
 

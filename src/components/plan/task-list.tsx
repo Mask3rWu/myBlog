@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 import { Task, TaskWithChildren } from '@/lib/supabase/types'
 import { TaskItem } from './task-item'
 import { TaskForm } from './task-form'
+import { useAuth } from '@/contexts/auth-context'
 import { Plus } from 'lucide-react'
 
 export function TaskList() {
@@ -12,6 +13,7 @@ export function TaskList() {
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const supabase = createClient()
+  const { user, isLoading: authLoading } = useAuth()
 
   const fetchTasks = useCallback(async () => {
     try {
@@ -124,13 +126,15 @@ export function TaskList() {
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">任务列表</h2>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-        >
-          <Plus className="w-5 h-5" />
-          新建任务
-        </button>
+        {user && (
+          <button
+            onClick={() => setShowForm(!showForm)}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          >
+            <Plus className="w-5 h-5" />
+            新建任务
+          </button>
+        )}
       </div>
 
       {showForm && (
