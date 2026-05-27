@@ -2,12 +2,15 @@
 CREATE TABLE IF NOT EXISTS portfolio_projects (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
+  summary TEXT,
   content TEXT,
   responsibility TEXT,
   role TEXT NOT NULL,
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
   github_url TEXT,
+  project_type TEXT,
+  tech_tags JSONB DEFAULT '[]'::jsonb,
   images JSONB DEFAULT '[]'::jsonb,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT now()

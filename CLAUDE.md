@@ -58,3 +58,15 @@ content/posts/<category>/<post>.md    →  /posts/<category>/<post>
 
 - **Static export**: No `cookies()`, `headers()`, `searchParams` on server — those only work at build/request time with a runtime server. Calls to `cookies()` in `server.ts` are only safe in middleware/API routes, which don't exist in this static-export setup. In practice, Supabase operations all happen client-side.
 - Path alias `@/*` → `./src/*`.
+
+### Database schema changes
+
+When adding or modifying columns in Supabase tables, always output the corresponding ALTER TABLE SQL for the user to run manually in the Supabase Dashboard. The migration files in `supabase/migrations/` are reference DDL for initial table creation; incremental changes require ALTER statements for already-created tables.
+
+### Git commits
+
+- **Group by module**: When developing multiple independent features or modules, split commits by functional scope (e.g., `feat(auth): ...` separate from `feat(portfolio): ...`).
+- **Single commit for single module**: When all changes belong to one feature module, a single commit is sufficient. Do not over-split.
+- **Exclude unrelated changes**: Before committing, check `git status` and `git diff` to ensure only files relevant to the current module are staged. Do not include unrelated modifications.
+- **Commit format**: Follow conventional commits — `feat(scope): description`, `fix(scope): description`, `refactor(scope): description`.
+- **Push after commit**: Always `git push` after committing.

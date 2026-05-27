@@ -20,10 +20,13 @@ export type UpdateTask = Partial<Omit<Task, 'id' | 'created_at'>>
 export interface PortfolioProject {
   id: string
   name: string
+  summary: string | null
   content: string | null
   responsibility: string | null
   role: string
   github_url: string | null
+  project_type: string | null
+  tech_tags: string[]
   start_date: string
   end_date: string
   images: string[]

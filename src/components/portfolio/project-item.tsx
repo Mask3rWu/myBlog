@@ -87,13 +87,26 @@ export function ProjectItem({ project, onUpdate, onDelete }: ProjectItemProps) {
           )}
         </div>
 
-        {/* Row 2: role + github + responsibility (left), date (right) */}
+        {/* Row 2: role + github + project_type + tags (left), date (right) */}
         <div className="mt-3 flex items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
+          <div className="flex flex-wrap items-center gap-2.5 text-sm text-slate-600">
             <span className="flex items-center gap-1.5">
               <User className="h-4 w-4 text-purple-500" />
               {project.role}
             </span>
+            {project.project_type && (
+              <span className="inline-flex rounded-xl bg-purple-100 px-2.5 py-1 text-xs font-medium text-purple-700">
+                {project.project_type}
+              </span>
+            )}
+            {project.tech_tags.map((tag, i) => (
+              <span
+                key={i}
+                className="inline-flex rounded-xl bg-emerald-100 px-2.5 py-1 text-xs font-medium text-emerald-700"
+              >
+                {tag}
+              </span>
+            ))}
             {project.github_url && (() => {
               const repo = getRepoInfo(project.github_url)!
               const Icon = repo.icon
@@ -122,49 +135,47 @@ export function ProjectItem({ project, onUpdate, onDelete }: ProjectItemProps) {
           </span>
         </div>
 
-        {/* Content preview */}
-        {project.content && (
-          <div className="mt-4">
-            <p className={`text-sm leading-7 text-slate-600 ${!showDetail && project.content.length > 200 ? 'line-clamp-3' : ''}`}>
-              {project.content}
-            </p>
+        {/* Summary — always visible */}
+        {project.summary && (
+          <p className={`mt-4 text-sm leading-7 text-slate-600 ${!showDetail ? 'line-clamp-5' : ''}`}>
+            {project.summary}
+          </p>
+        )}
+
+        {/* Expand / collapse toggle — only show when there's detail content or images */}
+        {(project.content || project.images.length > 0) && (
+          <div className="mt-3 flex items-center gap-3">
+            <button
+              onClick={() => { setShowDetail(!showDetail); setCurrentSlide(0) }}
+              className="inline-flex items-center gap-1 text-sm font-medium text-purple-600 hover:text-purple-700"
+            >
+              {showDetail ? (
+                <>
+                  收起详情 <ChevronUp className="h-4 w-4" />
+                </>
+              ) : (
+                <>
+                  查看详情 <ChevronDown className="h-4 w-4" />
+                </>
+              )}
+            </button>
+            {project.images.length > 0 && (
+              <span className="text-xs text-slate-400">
+                {project.images.length} 张图片
+              </span>
+            )}
           </div>
         )}
 
-        {/* Expand / detail toggle */}
-        <div className="mt-3 flex items-center gap-3">
-          <button
-            onClick={() => { setShowDetail(!showDetail); setCurrentSlide(0) }}
-            className="inline-flex items-center gap-1 text-sm font-medium text-purple-600 hover:text-purple-700"
-          >
-            {showDetail ? (
-              <>
-                收起详情 <ChevronUp className="h-4 w-4" />
-              </>
-            ) : (
-              <>
-                查看详情 <ChevronDown className="h-4 w-4" />
-              </>
-            )}
-          </button>
-          {project.images.length > 0 && (
-            <span className="text-xs text-slate-400">
-              {project.images.length} 张图片
-            </span>
-          )}
-        </div>
-
-        {/* Detail panel — content + image carousel, only rendered when expanded */}
+        {/* Detail panel — full content + image carousel, only rendered when expanded */}
         {showDetail && (
-          <div className="mt-5 border-t border-slate-100 pt-5">
-            {/* Full content */}
+          <div className="mt-4 border-t border-slate-100 pt-5">
             {project.content && (
               <p className="text-sm leading-7 text-slate-600 whitespace-pre-wrap">
                 {project.content}
               </p>
             )}
 
-            {/* Image carousel */}
             {project.images.length > 0 && (
               <div className="mt-5">
                 <div className="relative overflow-hidden rounded-2xl bg-slate-100">
@@ -193,7 +204,6 @@ export function ProjectItem({ project, onUpdate, onDelete }: ProjectItemProps) {
                     )}
                   </div>
 
-                  {/* Dots */}
                   {project.images.length > 1 && (
                     <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
                       {project.images.map((_, i) => (
@@ -208,13 +218,11 @@ export function ProjectItem({ project, onUpdate, onDelete }: ProjectItemProps) {
                     </div>
                   )}
 
-                  {/* Counter */}
                   <div className="absolute top-3 right-3 rounded-full bg-black/40 px-3 py-1 text-xs text-white backdrop-blur">
                     {currentSlide + 1} / {project.images.length}
                   </div>
                 </div>
 
-                {/* Thumbnail strip */}
                 <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
                   {project.images.map((url, i) => (
                     <button
