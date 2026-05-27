@@ -61,6 +61,12 @@ export function Navbar() {
             文章
           </Link>
           <Link
+            href="/portfolio"
+            className="text-sm font-medium text-slate-700 transition-colors hover:text-primary"
+          >
+            作品集
+          </Link>
+          <Link
             href="/tasks"
             className="text-sm font-medium text-slate-700 transition-colors hover:text-primary"
           >

@@ -16,3 +16,20 @@ export interface TaskWithChildren extends Task {
 
 export type NewTask = Omit<Task, 'id' | 'created_at' | 'updated_at'>
 export type UpdateTask = Partial<Omit<Task, 'id' | 'created_at'>>
+
+export interface PortfolioProject {
+  id: string
+  name: string
+  content: string | null
+  responsibility: string | null
+  role: string
+  github_url: string | null
+  start_date: string
+  end_date: string
+  images: string[]
+  created_at: string
+  updated_at: string
+}
+
+export type NewPortfolioProject = Omit<PortfolioProject, 'id' | 'created_at' | 'updated_at'>
+export type UpdatePortfolioProject = Partial<Omit<PortfolioProject, 'id' | 'created_at'>>
