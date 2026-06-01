@@ -5,7 +5,7 @@ import { PortfolioProject } from '@/lib/supabase/types'
 import { ProjectForm } from './project-form'
 import { useAuth } from '@/contexts/auth-context'
 import { deletePortfolioImage } from '@/lib/supabase/storage'
-import { Calendar, User, Briefcase, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Calendar, User, ExternalLink, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react'
 import { getRepoInfo } from '@/components/icons/repo-info'
 
 interface ProjectItemProps {
@@ -122,11 +122,16 @@ export function ProjectItem({ project, onUpdate, onDelete }: ProjectItemProps) {
                 </a>
               )
             })()}
-            {project.responsibility && (
-              <span className="flex items-center gap-1.5">
-                <Briefcase className="h-4 w-4 text-purple-500" />
-                {project.responsibility}
-              </span>
+            {project.demo_url && (
+              <a
+                href={project.demo_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-xl bg-purple-100 px-3 py-1 text-xs font-medium text-purple-700 hover:bg-purple-200 transition-colors"
+              >
+                <ExternalLink className="h-3 w-3" />
+                演示视频
+              </a>
             )}
           </div>
           <span className="flex items-center gap-1.5 text-sm text-slate-500 flex-shrink-0">

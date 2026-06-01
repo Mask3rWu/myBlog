@@ -23,7 +23,7 @@ export function ProjectForm({ project, onSubmit, onCancel }: ProjectFormProps) {
     name: project?.name || '',
     summary: project?.summary || '',
     content: project?.content || '',
-    responsibility: project?.responsibility || '',
+    demo_url: project?.demo_url || '',
     role: project?.role || '',
     start_date: toMonthValue(project?.start_date),
     end_date: toMonthValue(project?.end_date),
@@ -35,7 +35,7 @@ export function ProjectForm({ project, onSubmit, onCancel }: ProjectFormProps) {
     name: string
     summary: string
     content: string
-    responsibility: string
+    demo_url: string
     role: string
     start_date: string
     end_date: string
@@ -112,7 +112,7 @@ export function ProjectForm({ project, onSubmit, onCancel }: ProjectFormProps) {
         name: formData.name,
         summary: formData.summary || null,
         content: formData.content || null,
-        responsibility: formData.responsibility || null,
+        demo_url: formData.demo_url || null,
         role: formData.role,
         start_date: formData.start_date ? formData.start_date + '-01' : '',
         end_date: formData.end_date ? formData.end_date + '-01' : '',
@@ -186,16 +186,16 @@ export function ProjectForm({ project, onSubmit, onCancel }: ProjectFormProps) {
       </div>
 
       <div>
-        <label htmlFor="responsibility" className="block text-sm font-medium text-slate-700 mb-1.5">
-          负责部分
+        <label htmlFor="demo_url" className="block text-sm font-medium text-slate-700 mb-1.5">
+          演示视频
         </label>
         <input
-          type="text"
-          id="responsibility"
-          value={formData.responsibility}
-          onChange={(e) => setFormData({ ...formData, responsibility: e.target.value })}
+          type="url"
+          id="demo_url"
+          value={formData.demo_url}
+          onChange={(e) => setFormData({ ...formData, demo_url: e.target.value })}
           className="w-full px-4 py-2.5 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-          placeholder="描述你在项目中负责的工作"
+          placeholder="https://example.com/demo"
         />
       </div>
 
@@ -215,7 +215,7 @@ export function ProjectForm({ project, onSubmit, onCancel }: ProjectFormProps) {
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1.5">
-          技术栈
+          关键词
         </label>
         <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-slate-200 px-3 py-2 focus-within:ring-2 focus-within:ring-purple-500 focus-within:border-transparent">
           {formData.tech_tags.map((tag, i) => (

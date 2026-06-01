@@ -22,7 +22,7 @@ export interface PortfolioProject {
   name: string
   summary: string | null
   content: string | null
-  responsibility: string | null
+  demo_url: string | null
   role: string
   github_url: string | null
   project_type: string | null
