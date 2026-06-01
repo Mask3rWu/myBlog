@@ -13,7 +13,7 @@ export function ProjectList() {
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const supabase = useMemo(() => createClient(), [])
-  const { user } = useAuth()
+  const { user, isLoading: authLoading } = useAuth()
 
   const fetchProjects = useCallback(async () => {
     try {
@@ -33,8 +33,10 @@ export function ProjectList() {
   }, [supabase])
 
   useEffect(() => {
-    fetchProjects()
-  }, [fetchProjects])
+    if (!authLoading) {
+      fetchProjects()
+    }
+  }, [fetchProjects, authLoading])
 
   const handleCreateProject = async (data: Partial<PortfolioProject>) => {
     try {
