@@ -14,13 +14,9 @@ export default function AuthorCard({ className = '' }: AuthorCardProps) {
         </div>
         <div>
           <p className="text-2xl font-semibold tracking-tight">Mask3rWu</p>
-          <p className="text-sm text-muted-foreground">Agent Developer</p>
+          <p className="text-sm text-muted-foreground">Full-Stack & Agent Developer</p>
         </div>
       </div>
-
-      <p className="rounded-2xl bg-slate-50 px-4 py-3 text-sm leading-7 text-slate-600">
-        喜欢把内容系统、前端体验和静态部署整理成清晰可维护的结构。这个博客主要记录工程实践、技术观察和还算靠谱的折腾结果。
-      </p>
 
       <div className="mt-6 space-y-3 text-sm text-slate-600">
         <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
@@ -53,12 +49,13 @@ export default function AuthorCard({ className = '' }: AuthorCardProps) {
             <ArrowUpRight className="h-4 w-4 text-slate-400" />
           </a>
         </div>
+
       </div>
 
       <div className="mt-6 border-t border-slate-100 pt-5">
-        <p className="text-sm font-medium text-slate-700">当前站点</p>
+        {/* <p className="text-sm font-medium text-slate-700">当前站点</p> */}
         <p className="mt-2 text-sm leading-7 text-muted-foreground">
-          Markdown 驱动内容，按目录组织文章，文章页支持筛选、排序和搜索。
+          专注全栈开发与 AI Agent 应用，探索软件工程的自动化实践。
         </p>
       </div>
     </div>

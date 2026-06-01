@@ -136,7 +136,7 @@ export function PostsExplorer({
                   </div>
                   <div className="flex items-center justify-between border-t border-slate-100 pt-4">
                     <p className="text-sm text-muted-foreground">
-                      Markdown frontmatter 驱动的文章元数据
+                      文章元数据
                     </p>
                     <Button asChild variant="ghost" className="px-0 text-sm">
                       <Link href={`/posts/${post.slug}`}>阅读全文</Link>
@@ -175,7 +175,7 @@ export function PostsExplorer({
           <CardHeader>
             <CardTitle className="text-lg">筛选文章</CardTitle>
             <CardDescription>
-              右侧筛选器基于 Markdown frontmatter 的标题、日期、标签和目录分类。
+              按标题、日期、标签和分类筛选文章。
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">

@@ -8,21 +8,20 @@ export default function About() {
         <h1 className="mb-6 text-4xl font-bold tracking-tight">关于我</h1>
         <div className="prose prose-slate max-w-none prose-p:leading-8">
           <p>
-            你好，我是这个博客的作者。这个站点现在以 Markdown 作为内容源，
-            重点放在文章归档、检索和静态发布，而不是传统的模板式展示。
+            你好，我是 Mask3rWu，一名全栈开发者，目前专注于 Agent 开发与 AI 驱动的软件工程实践。
           </p>
-          <h2>这个版本的目标</h2>
+          <h2>关注方向</h2>
           <ul>
-            <li>把文章管理方式改成纯 Markdown 文件</li>
-            <li>通过目录组织分类，通过 frontmatter 管理标签和摘要</li>
-            <li>让首页和文章页都能直接完成筛选、排序和搜索</li>
+            <li>全栈 Web 开发（Next.js、TypeScript、Node.js）</li>
+            <li>AI Agent 应用设计与开发</li>
+            <li>软件工程自动化与工具链</li>
           </ul>
           <h2>技术栈</h2>
           <ul>
             <li>Next.js 14 (App Router)</li>
-            <li>Tailwind CSS</li>
+            <li>Tailwind CSS / shadcn/ui</li>
             <li>TypeScript</li>
-            <li>gray-matter + marked</li>
+            <li>Supabase</li>
             <li>GitHub Pages 静态部署</li>
           </ul>
         </div>

@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { PortfolioProject, NewPortfolioProject } from '@/lib/supabase/types'
+import { PortfolioProject } from '@/lib/supabase/types'
 import { ProjectItem } from './project-item'
 import { ProjectForm } from './project-form'
 import { useAuth } from '@/contexts/auth-context'
@@ -12,7 +12,7 @@ export function ProjectList() {
   const [projects, setProjects] = useState<PortfolioProject[]>([])
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const { user } = useAuth()
 
   const fetchProjects = useCallback(async () => {

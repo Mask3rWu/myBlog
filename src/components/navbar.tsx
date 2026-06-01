@@ -44,7 +44,7 @@ export function Navbar() {
           </button>
           <Link href="/">
             <span className="block text-base font-semibold tracking-tight">My Blog</span>
-            <span className="block text-xs text-muted-foreground">Markdown Archive</span>
+            <span className="block text-xs text-muted-foreground">Full-Stack & Agent</span>
           </Link>
         </div>
         <nav className="flex flex-1 items-center gap-6">
@@ -55,31 +55,13 @@ export function Navbar() {
             首页
           </Link>
           <Link
-            href="/posts"
-            className="text-sm font-medium text-slate-700 transition-colors hover:text-primary"
-          >
-            文章
-          </Link>
-          <Link
             href="/portfolio"
             className="text-sm font-medium text-slate-700 transition-colors hover:text-primary"
           >
             作品集
           </Link>
-          <Link
-            href="/tasks"
-            className="text-sm font-medium text-slate-700 transition-colors hover:text-primary"
-          >
-            任务管理
-          </Link>
-          <Link
-            href="/roadmap"
-            className="text-sm font-medium text-slate-700 transition-colors hover:text-primary"
-          >
-            站点规划
-          </Link>
         </nav>
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" asChild className="rounded-full">
             <Link href="/about">关于作者</Link>
           </Button>

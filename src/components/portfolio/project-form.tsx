@@ -160,7 +160,7 @@ export function ProjectForm({ project, onSubmit, onCancel }: ProjectFormProps) {
             value={formData.role}
             onChange={(e) => setFormData({ ...formData, role: e.target.value })}
             className="w-full px-4 py-2.5 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-            placeholder="如：前端开发、项目经理"
+            placeholder="如：全栈开发、Agent开发、项目经理"
           />
         </div>
 

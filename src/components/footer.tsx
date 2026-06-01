@@ -9,7 +9,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold tracking-tight">My Blog</h3>
             <p className="text-sm leading-6 text-muted-foreground">
-              一个用 Markdown 维护内容、用目录组织分类的静态博客。页面结构围绕内容发现与筛选来设计。
+              全栈开发者的个人站点，展示项目经验与技术实践。
             </p>
           </div>
           <div>
@@ -21,8 +21,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/posts" className="hover:text-primary transition-colors">
-                  文章列表
+                <Link href="/portfolio" className="hover:text-primary transition-colors">
+                  作品集
                 </Link>
               </li>
               <li>
@@ -33,22 +33,22 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-4">内容结构</h4>
+            <h4 className="font-semibold mb-4">技术栈</h4>
             <div className="flex flex-wrap gap-2">
-              <span className="rounded-md bg-secondary px-2 py-1 text-xs">Markdown</span>
-              <span className="rounded-md bg-secondary px-2 py-1 text-xs">标签筛选</span>
-              <span className="rounded-md bg-secondary px-2 py-1 text-xs">二级目录</span>
-              <span className="rounded-md bg-secondary px-2 py-1 text-xs">静态导出</span>
+              <span className="rounded-md bg-secondary px-2 py-1 text-xs">Next.js</span>
+              <span className="rounded-md bg-secondary px-2 py-1 text-xs">TypeScript</span>
+              <span className="rounded-md bg-secondary px-2 py-1 text-xs">Tailwind CSS</span>
+              <span className="rounded-md bg-secondary px-2 py-1 text-xs">Supabase</span>
             </div>
           </div>
           <div>
             <h4 className="font-semibold mb-4">继续浏览</h4>
             <div className="space-y-2 text-sm text-muted-foreground">
               <Link
-                href="/posts"
+                href="/portfolio"
                 className="flex items-center gap-2 hover:text-primary transition-colors"
               >
-                查看全部文章
+                查看作品集
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
               <Link
