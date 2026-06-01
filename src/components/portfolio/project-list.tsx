@@ -7,6 +7,15 @@ import { ProjectItem } from './project-item'
 import { ProjectForm } from './project-form'
 import { useAuth } from '@/contexts/auth-context'
 import { Plus, FolderOpen } from 'lucide-react'
+import {
+  DndContext,
+  DragEndEvent,
+  closestCenter,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable'
 
 export function ProjectList() {
   const [projects, setProjects] = useState<PortfolioProject[]>([])
@@ -15,11 +24,16 @@ export function ProjectList() {
   const supabase = useMemo(() => createClient(), [])
   const { user, isLoading: authLoading } = useAuth()
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } })
+  )
+
   const fetchProjects = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('portfolio_projects')
         .select('*')
+        .order('sort_order', { ascending: true })
         .order('start_date', { ascending: false })
 
       if (error) throw error
@@ -37,6 +51,28 @@ export function ProjectList() {
       fetchProjects()
     }
   }, [fetchProjects, authLoading])
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event
+    if (!over || active.id === over.id) return
+
+    const oldIndex = projects.findIndex((p) => p.id === active.id)
+    const newIndex = projects.findIndex((p) => p.id === over.id)
+    const reordered = arrayMove(projects, oldIndex, newIndex)
+    setProjects(reordered)
+
+    // Batch update all sort_order values to match the new order
+    try {
+      await Promise.all(
+        reordered.map((p, i) =>
+          supabase.from('portfolio_projects').update({ sort_order: i }).eq('id', p.id)
+        )
+      )
+    } catch (error) {
+      console.error('Error updating sort order:', error)
+      fetchProjects() // fallback: refetch original order
+    }
+  }
 
   const handleCreateProject = async (data: Partial<PortfolioProject>) => {
     try {
@@ -118,16 +154,20 @@ export function ProjectList() {
           {user && <p className="text-sm mt-1">点击上方按钮创建第一个作品</p>}
         </div>
       ) : (
-        <div>
-          {projects.map((project) => (
-            <ProjectItem
-              key={project.id}
-              project={project}
-              onUpdate={handleUpdateProject}
-              onDelete={handleDeleteProject}
-            />
-          ))}
-        </div>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+          <SortableContext items={projects.map((p) => p.id)} strategy={verticalListSortingStrategy}>
+            <div>
+              {projects.map((project) => (
+                <ProjectItem
+                  key={project.id}
+                  project={project}
+                  onUpdate={handleUpdateProject}
+                  onDelete={handleDeleteProject}
+                />
+              ))}
+            </div>
+          </SortableContext>
+        </DndContext>
       )}
     </div>
   )

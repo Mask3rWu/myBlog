@@ -30,6 +30,7 @@ export interface PortfolioProject {
   start_date: string
   end_date: string
   images: string[]
+  sort_order: number
   created_at: string
   updated_at: string
 }

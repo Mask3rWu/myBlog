@@ -5,8 +5,10 @@ import { PortfolioProject } from '@/lib/supabase/types'
 import { ProjectForm } from './project-form'
 import { useAuth } from '@/contexts/auth-context'
 import { deletePortfolioImage } from '@/lib/supabase/storage'
-import { Calendar, User, ExternalLink, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Calendar, User, ExternalLink, GripVertical, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react'
 import { getRepoInfo } from '@/components/icons/repo-info'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 interface ProjectItemProps {
   project: PortfolioProject
@@ -25,6 +27,21 @@ export function ProjectItem({ project, onUpdate, onDelete }: ProjectItemProps) {
   const [showDetail, setShowDetail] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
   const { user } = useAuth()
+
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: project.id, disabled: !user })
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.4 : undefined,
+  }
 
   const handleDelete = async () => {
     if (confirm('确定要删除这个项目吗？相关的图片也会被删除。')) {
@@ -61,7 +78,11 @@ export function ProjectItem({ project, onUpdate, onDelete }: ProjectItemProps) {
   }
 
   return (
-    <div className="mb-4 overflow-hidden rounded-[2rem] border border-white/60 bg-white/85 shadow-lg shadow-slate-200/60 backdrop-blur transition hover:shadow-xl hover:shadow-slate-200/70">
+    <div
+      ref={setNodeRef}
+      style={style}
+      className="mb-4 overflow-hidden rounded-[2rem] border border-white/60 bg-white/85 shadow-lg shadow-slate-200/60 backdrop-blur transition hover:shadow-xl hover:shadow-slate-200/70"
+    >
       <div className="p-6">
         {/* Row 1: name + buttons */}
         <div className="flex items-start justify-between gap-4">
@@ -71,6 +92,14 @@ export function ProjectItem({ project, onUpdate, onDelete }: ProjectItemProps) {
 
           {user && (
             <div className="flex gap-2 flex-shrink-0">
+              <button
+                {...attributes}
+                {...listeners}
+                className="rounded-xl bg-slate-100 px-1.5 py-1.5 text-xs font-medium text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors cursor-grab active:cursor-grabbing"
+                title="拖拽排序"
+              >
+                <GripVertical className="h-4 w-4" />
+              </button>
               <button
                 onClick={() => setIsEditing(true)}
                 className="rounded-xl bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-200 transition-colors"
